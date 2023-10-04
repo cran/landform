@@ -94,23 +94,30 @@ count of cells in each class) may not accurately represent the true area on the 
 a raster layer in a suitable projected coordinate system for your area of interest to ensure accurate area calculations.
 }
 \examples{
-# EXAMPLE 1
 
-# Get an elevation dataset to be used
-require("spatialEco")
-elev <-terra::rast(system.file("extdata/elev.tif", package="spatialEco"))
+# Create a toy elevation dataset
+# Define the raster dimensions
+nrows <- 100
+ncols <- 100
+
+# Create a matrix with random values
+set.seed(123) # to make the example reproducible
+mat <- matrix(runif(nrows*ncols), nrow=nrows, ncol=ncols)
+
+# Convert the matrix to a raster object
+library(terra)
+elev <- rast(mat)
+
+# EXAMPLE 1
 
 # Run the analysis
 result <- landform(elev, scale = 3, class.type = "slope.position")
 
 # EXAMPLE 2
 
-# Get an elevation dataset to be used
-require("spatialEco")
-elev <- terra::rast(system.file("extdata/elev.tif", package="spatialEco"))
-
 # Run the analysis
 result <- landform(elev, class.type = "landform.classification", sn=3, ln=11)
+
 
 }
 \references{
